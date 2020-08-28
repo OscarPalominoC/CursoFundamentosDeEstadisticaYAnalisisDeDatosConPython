@@ -299,5 +299,5 @@ plt.hist(y)
 
 
 
-![png](/output_23_1.png)
+![png](output_23_1.png)
 
