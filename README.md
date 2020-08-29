@@ -22,6 +22,9 @@ Realiza una predicción de la probabilidad de salvarse en el Titanic con las her
     * [Boxplot y scatterplot](#boxplot-y-scatterplot)
 * [Aplicar conceptos de probabilidad a eventos aleatorios](#aplicar-conceptos-de-probabilidad-a-eventos-aleatorios)
     * [Probabilidad condicional - Teorema de Bayes](#probabilidad-condicional---teorema-de-bayes)
+    * [Funciones de distribución discreta y continua](#funciones-de-distribución-discreta-y-continua)
+    * [Funciones de distribución discreta y continua con Python](#funciones-de-distribución-discreta-y-continua-con-python)
+    * [Distribuciones discretas de mayor aplicación](#distribuciones-discretas-de-mayor-aplicación)
 
 <hr>
 
@@ -179,6 +182,8 @@ P(¬A): Probabilidad que no suceda A
 P(A | B) = (P(A) * P(B | A)) / P(B)
 ```
 
+![Fórmula](/images/bayes-theorem.png)
+
 ### Conceptos
 
 * **Probabilidad univariada**: Incluye todas las técnicas que hacen referencia a la descripción e inferencia de una sola variable. También se conoce como *Estadística Descriptiva*.
@@ -187,3 +192,79 @@ P(A | B) = (P(A) * P(B | A)) / P(B)
 
 [Probabilidad condicional: Teorema de Bayes](/scripts/aplicando-conceptos/probabilidad-condicional.md)
 
+## Funciones de distribución discreta y continua
+
+### Distribución de probabilidad discreta
+
+![Probabilidad discreta](/images/probabilidad-discreta.png)
+
+* El rango debe cumplir y contener a todos los valores de X.
+* La probabilidad de cada uno de los valores de X, no debe superar el valor de 1.
+* La probaacumulada es la suma de las probabilidades de tener un número igual o menor a Xi.
+* Regla de completitud, debemos contemplar todos los valores posibles que puede tomar una sola variable aleatoria X, luego la sumatoria de todas las probabilidades de nuestro rango, siempre deben sumar 1.
+* Debemos tener siempre en cuenta todas las medidas de tendencia central, para poder hallar el valor esperado o promedio.
+* Y la desviación estándar que en este caso llamaremos varianza que es el cuadrado de la diferencia de la media y el valor Xi evaluado.
+
+### Distribución de densidad continua
+
+![Probabilidad discreta](/images/densidad-continua.png)
+
+Debemos evaluar los mismos conceptos de la [distribución de probabilidad discreta](#distribución-de-probabilidad-discreta).
+
+### Valor esperado
+
+Al igual que la varianza también cumple una serie de características y una forma específica a la hora de calcularse.
+
+[Valor esperado](/images/valor-esperado.png)
+
+### Varianza
+
+[Valor esperado](/images/varianza.png)
+
+[Funciones de distribución discreta y continua](/scripts/aplicando-conceptos/distribucion-discreta-continua/funciones_distribucion_discreta_continua.md)
+
+binom.pmf: Probability Mass Function - [Función de probabilidad](https://es.wikipedia.org/wiki/Funci%C3%B3n_de_probabilidad). Es una función que asocia a cada punto de su espacio muestral X la probabilidad de que esta lo asuma. 
+
+[Fórmula](/images/pmf-formula.png)
+
+para k en {0, 1, ..., n}.
+
+Binom toma n y p como parámetros de forma.
+
+La función de masa de probabilidad anterior se define en la forma "estandarizada". Para cambiar la distribución, use el parámetro loc. Específicamente, binom.pmf (k, n, p, loc) es idénticamente equivalente a binom.pmf (k - loc, n, p).
+
+[Documentación: Funciones binomiales](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binom.html)
+
+## Funciones de distribución discreta y continua con Python
+
+### Conceptos
+
+* **ASIMETRÍA** Es una medida de forma de una distribución que permite identificar y describir la manera como los datos tiende a reunirse de acuerdo con la frecuencia con que se hallen dentro de la distribución. Permite identificar las características de la distribución de datos sin necesidad de generar el gráfico
+* **CURTOSIS O APUNTAMIENTO** La curtosis mide el grado de agudeza o achatamiento de una distribución con relación a la distribución normal, es decir, mide cuán puntiaguda es una distribución.
+
+**TIPOS DE CURTOSIS**
+
+La curtosis determina el grado de concentración que presentan los valores en la región central de la distribución. Así puede ser:
+* Leptocúrtica.- Existe una gran concentración.
+* Mesocúrtica.- Existe una concentración normal. 
+* Platicúrtica.- Existe una baja concentración.
+
+binom.cdf: Cumulative distribution function - [Función de distribución acumulada](https://es.wikipedia.org/wiki/Funci%C3%B3n_de_distribuci%C3%B3n). función de probabilidad acumulada asociada a una variable aleatoria real: X (mayúscula) sujeta a cierta ley de distribución de probabilidad, es una función matemática de la variable real: x (minúscula); que describe la probabilidad de que X tenga un valor menor o igual que x.
+
+Intuitivamente, asumiendo la función f como la ley de distribución de probabilidad, la FDA sería la función con la recta real como dominio, con imagen del área hasta aquí de la función f, siendo aquí el valor x para la variable aleatoria real X.
+
+La FDA asocia a cada valor x, la probabilidad del evento: «la variable X toma valores menores o iguales a x».
+
+El concepto de FDA puede generalizarse para modelar variables aleatorias multivariantes definidas en ![Reales potencia de n](/images/rn.svg)
+
+[Funciones de distribución discreta y continua](/scripts/aplicando-conceptos/distribucion-discreta-continua-2/distribucion-discreta-continua-2.md)
+
+## Distribuciones discretas de mayor aplicación
+
+1. Bernoulli: Experimento Binario asociado a éxito o fracaso.
+2. Distribución Binomial: Número de éxitos x en N ensayos.
+3. Distribución Geométrica: Número de ensayos x hasta 1 éxito.
+4. Distribución Binomial Negativa: Número de ensayos x hasta el k-ésimo éxito.
+5. Distribución de Poisson: Número de llegadas en N a una longitud de tiempo t.
+
+[Distribuciones discretas de mayor aplicación](/scripts/aplicando-conceptos/distribuciones_discretas_aplicacion/distribuciones-discretas-mas-utilizadas.md)
