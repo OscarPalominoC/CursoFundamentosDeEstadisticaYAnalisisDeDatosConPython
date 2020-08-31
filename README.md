@@ -235,17 +235,17 @@ Debemos evaluar los mismos conceptos de la [distribución de probabilidad discre
 
 Al igual que la varianza también cumple una serie de características y una forma específica a la hora de calcularse.
 
-[Valor esperado](/images/valor-esperado.png)
+![Valor esperado](/images/valor-esperado.png)
 
 ### Varianza
 
-[Valor esperado](/images/varianza.png)
+![Valor esperado](/images/varianza.png)
 
 [Funciones de distribución discreta y continua](/scripts/2-aplicando-conceptos/distribucion-discreta-continua/funciones_distribucion_discreta_continua.md)
 
 binom.pmf: Probability Mass Function - [Función de probabilidad](https://es.wikipedia.org/wiki/Funci%C3%B3n_de_probabilidad). Es una función que asocia a cada punto de su espacio muestral X la probabilidad de que esta lo asuma. 
 
-[Fórmula](/images/pmf-formula.png)
+![Fórmula](/images/pmf-formula.png)
 
 para k en {0, 1, ..., n}.
 
