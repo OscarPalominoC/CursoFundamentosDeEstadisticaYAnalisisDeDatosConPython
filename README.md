@@ -334,6 +334,8 @@ Ambas miden el valor de la **relación lineal** entre 2 variables aleatorias X y
 
 # Construir conceptos estadísticos analíticos
 
+[Carpeta de trabajo](/scripts/3-construccion-conceptos-estadisticos-analiticos/)
+
 ## Estimadores a través de datos
 
 ![Uso de Estimadores](/images/estimadores.png)
@@ -392,6 +394,8 @@ Indica que si sumamos n cantidad de variables aleatorias independientes con un n
 [Teorema del límite central](/scripts/3-construccion-conceptos-estadisticos-analiticos/3-teorema-del-limite-central/teorema-del-limite-central.md)
 
 # Realizar inferencias estadisticas a partir de una muestra
+
+[Carpeta de trabajo](/scripts/4-inferencia-estadistica-partir-muestra/)
 
 ## Pruebas de hipótesis
 
@@ -465,9 +469,10 @@ Nos permiten encontrar el límite inferior y superior tales que acumulen cierta 
 
 # Usar modelos estadísticos para exploración y predicción
 
+[Carpeta de Trabajo](/scripts/5-modelos-estadisticos-exploracion-prediccion/)
 
 ## Regresión Lineal
 
 Es un modelo, algoritmo o función matemática que aproxima de forma **óptima** la relación entre una variable Y y una variable X o un set de variables (X1, X2, X3, ..., Xn), utilizando la función de la recta (es decir, una línea).
 
-[Regresión Lineal](/scripts/4-inferencia-estadistica-partir-muestra/5-modelos-estadisticos-exploracion-prediccion/1-regresion-lineal/regresion-lineal.md)
+[Regresión Lineal](/scripts/5-modelos-estadisticos-exploracion-prediccion/1-regresion-lineal/regresion-lineal.md)
