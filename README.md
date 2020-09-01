@@ -45,6 +45,10 @@ Realiza una predicción de la probabilidad de salvarse en el Titanic con las her
     * [Intervalos de confianza](#intervalos-de-confianza)
 * [Usar modelos estadísticos para exploración y predicción](usar-modelos-estadísticos-para-exploración-y-predicción)
     * [Regresión Lineal](#regresión-lineal)
+    * [Regresión logística](#regresión-logística)
+    * [Árboles de regresión y de clasificación](#árboles-de-regresión-y-de-clasificación)
+* [Introducir conceptos de analítica avanzada](#introducir-conceptos-de-analítica-avanzada)
+    * [Proyecto análisis exploratorio: Descriptivos, outliers, creación y selección de variables](#proyecto-análisis-exploratorio-descriptivos-outliers-creación-y-selección-de-variables)
 
 <hr>
 
@@ -475,4 +479,185 @@ Nos permiten encontrar el límite inferior y superior tales que acumulen cierta 
 
 Es un modelo, algoritmo o función matemática que aproxima de forma **óptima** la relación entre una variable Y y una variable X o un set de variables (X1, X2, X3, ..., Xn), utilizando la función de la recta (es decir, una línea).
 
+**Función de la Recta**: Y = aX +b, *a* = pendiente y *b* = corte en el eje de las coordenadas.
+
+**Función de Regresión**: Y = aX + b + error, X y Y V.A.
+
+*a* y *b* son los **parámetros poblacionales** de la función que relaciona a Y y X.
+
+El objetivo de un análisis de regresión es encontrar los mejores estimadores de *a* y *b* con el **mínimo error**.
+
+## Pasos
+
+1. Identificar a partir de un conjunto de variables X1, X2, ..., Xk cuáles son las que mejor explican linealmente a una V.A. de interés Y.
+2. A partir del modelo de regresión lineal, predecir el comportamiento de una V.A. Y con base en el comportamiento de un conjunto de variables X1, X2, ..., Xk.
+
+![Regresión lineal](/images/regresion-lineal.png)
+
+Comentario de: [Riccilob](https://platzi.com/@riccilob)
+
+La ‘aleatoriedad’ en realidad se refiere a los residuos (y- y_pred), también llamados errores o residuales. Y se requiere porque es un supuesto del modelo. A eso hace referencia la gráfica que facilita visualizar cómo se distribuyen los errores (o las diferencias, o los residuos, como la quieran llamar). Si no se observa un patrón se suele asumir que son aleatorias (otro supuestos en el análisis de residuales es que tengan una distribción normal y una varianza constante).
+
+Residuales independientes:
+
+![Residuales independientes](/images/independant-residuals.jpg)
+
+Residuales No independientes (claramente se ve un patrón), lo que significa que la destribución de los residuos no es aleatoria (y hay que corregir el modelo o quizá porbar con un modelo no lineal):
+
+![Residuales NO independientes](/images/non-independant-residuals.jpg)
+
+[Fuente](https://www.jmp.com/en_us/statistics-knowledge-portal/what-is-regression/simple-linear-regression-assumptions.html)
+
+El modelo de regresión busca minimizar estos valores, pero siempre se asume que hay un término de ‘Error’ asociado al modelo y que es porpio de la naturaleza del fenómeno que estamos analizando.
+
+### Funciones utilizadas
+
+* OLS Ordinary Least Squares: Será la manera en la que optimicemos los parámetros de la función de Regresión Lineal.
+    * reg_lin = sm.OLS(y, sm.add_constant(X)).fit(), recibe 2 parámetros, la variable dependiente Y (en este caso los salarios) y la constante X, que en este caso, como estamos evaluando 2 posibilidades (gpa(promedio acumulado en la carrera) y experiencia, usaremos la X mayúsculas, por tener una matriz. Obtendremos lo siguiente.
+```
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                salario   R-squared:                       0.798
+Model:                            OLS   Adj. R-squared:                  0.794
+Method:                 Least Squares   F-statistic:                     211.0
+Date:                Mon, 31 Aug 2020   Prob (F-statistic):           7.37e-38
+Time:                        21:29:53   Log-Likelihood:                -1135.4
+No. Observations:                 110   AIC:                             2277.
+Df Residuals:                     107   BIC:                             2285.
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const       4968.0099   4325.267      1.149      0.253   -3606.328    1.35e+04
+gpa         2.024e+04   1364.423     14.831      0.000    1.75e+04    2.29e+04
+experien    1973.1918    148.539     13.284      0.000    1678.730    2267.653
+==============================================================================
+Omnibus:                        0.779   Durbin-Watson:                   1.909
+Prob(Omnibus):                  0.678   Jarque-Bera (JB):                0.857
+Skew:                          -0.191   Prob(JB):                        0.651
+Kurtosis:                       2.795   Cond. No.                         72.2
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+```
+Dep. Variable:                salario -> Variable dependiente
+Model:                            OLS -> Modelo utilizado (Ordinary List Squares)
+R-squared: Es una medida de desempeño en este caso nos indica que nuestra regresión en nuestras variables X están explicando la variabilidad de Y en un 79%.
+F-statistic: Se usa en generación de pruebas de hipotesis para medir la significancia de esta regresión que será apróximada a partir de este estadístico.
+Prob (F-statistic): La probabilidad de que no rechacemos de que la significancia de esta regresión sea nula.
+
+Nuestro interés principal son los coeficientes que corresponden a alpha y beta, donde alpha o a será la pendiente, en este caso por tener 2 variables explicativas (gpa y experien) estarán asociadas a las variables X definidas previamente. La constante en la tabla es dónde se cortan en el eje Y.
+
+std err nos hace referencia al error asociado a los coeficientes, con estos 2, podemos construir una función t, sobre t probar la significancia de estos parámetros, en este caso, al probar la significancia de los parámetros tenemos una función o una hipótesis nula de que el parámetros es igual a cero, nos está indicando la probabilidad de que esta t o mejor, de que el error tipo I o probabilidad de rechazo, es muy cercana a 0.
+```
+  P>|t|
+----------
+  0.253
+  0.000
+  0.000
+```
+Por lo cual rechazaríamos esta hipotesis nula, y tendríamos que estadísticamente hablando el coeficiente asociado a gpa es diferente de cero, por lo que la variable es significativa y permite explicar a Y. 
+```
+   [0.025      0.975]
+-----------------------
+ -3606.328    1.35e+04
+  1.75e+04    2.29e+04
+  1678.730    2267.653
+```
+Estos son los intervalos de confianza para cada una de las variables que hemos definido. 
+
+Por último se muestran una serie de pruebas que deben hacerse para chequear la estabilidad del modelo que hemos generado en particular los modelos de regresión deben chequear 3 cosas:
+* Que el error se distribuya normal, para ello entonces, se genera una figura de los errores.
+```
+# Figura de los errores
+fig, ax = plt.subplots()
+y_pred = reg_lin.predict(sm.add_constant(X))
+ax.scatter(y, y-y_pred)
+plt.axhline(y=0, color='black', alpha = 0.8, linestyle='--') 
+```
+![Random](/images/random.png)
+
+Como el diagrama de puntos no identifica ningún patrón, sino que son aleatorios, podemos decir que la muestra es aleatoria. Lo mismo puede probarse con la prueba de Jarque-Bera (JB).
+
+Otro chequeo importante que se debe hacer es que no haya multi-colinealidad entre los regresores o las variables X y esta se puede probar a través de la prueba Cond. No., y la prueba omnibus nos permite saber si las varianzas del modelo son iguales o están igualmente distribuidas, que es otro fuerte del modelo de regresión, lo que se conoce como elasticidad de la varianza.
+
+![Resultado](/images/results.png)
+
+### Conclusión
+
+El modelo de regresión lineal nos va a permitir identificar los pesos que tienen las variables a la hora de explicar a Y y también hacer predicciones en el futuro sobre la variable Y.
+
 [Regresión Lineal](/scripts/5-modelos-estadisticos-exploracion-prediccion/1-regresion-lineal/regresion-lineal.md)
+
+## Regresión logística
+
+Los modeos de regresión lineal tienen como variable de respuesta (Y) una variable **cuantitativa**.
+
+¿Qué pasa si la variable de respuesta fuera **cualitativa**?
+
+Por ejemplo, una variable cualitativa o de naturaleza Bernoulli, que indique si una persona compra o no un producto.
+
+X = 0: **NO COMPRADOR**,          X = 1: **COMPRADOR**
+
+Ahora la regresión lineal no se puede aplicar porque al estimar los valores 0 o 1 incurriríamos en valores menores a 0 y mayores que 1.
+
+Transformaremos la variable de salida con el operador logístico, el cual acotará el resultado a **0** o **1**, a través de la siguiente fórmula:
+
+![Fórmula: Regresión Logística](/images/formula-regresion-logistica.png)
+
+
+
+[Regresión Logistíca](/scripts/5-modelos-estadisticos-exploracion-prediccion/2-regresion-logistica/regresion-logistica.md)
+
+## Árboles de regresión y de clasificación
+
+[Documentación oficial Scikit-Learn: Árbol de Decisiones](https://scikit-learn.org/stable/modules/tree.html)
+
+No solo están inspirados en la naturaleza sino en la forma en la que los humanos tomamos decisión. Un árbol de decisión al igual que la regresión, va a necesitar una serie de inputs o variables aleatorias X que pasaremos a través de las decisiones del árbol y nos permitirá aproximar el valor de Y.
+
+![Árbol de decisión](/images/arbol-decision.png)
+
+Los árboles de decisión son ampliamente utilizados debido a su **alta capacidad explicativa** a la hora de estimar Y con un conjunto de variables X.
+* Las preguntas en cada nodo pueden ser variables categóricas o numéricas.
+* Los árboles de decisión pueden ser de regresión cuando aproximan una variable numérica o de clasificación cuando aproximan una categoría.
+
+![Ejemplo: Árbol de Decisión](/images/minitree.png)
+
+Los árboles necesitan o están compuestos por unos nodos, ramas, y las hojas. En los nodos encontramos las variables aleatorias X, en las ramas las decisiones o reglas que se aplican a X y en las hojas el valor de Y, bajo las decisión que hemos tomado para X.
+
+### Base fundamental para entrenar modelos
+Dividir la muestra para poder probar el desempeño del modelo en 2 partes.
+
+Se divide en X y en Y. Esto es una parte de la base que el modelo nunca verá y que nos permitirá probar con más certeza el desempeño del modelo.
+
+`X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 1)`
+0.2 es el porcentaje que queremos que quede en la base de la base en test. El random_state sirve para que el sampling aleatorio que se hace para generar estas diferentes muestras siempre sea reproducible.
+
+clf = classifier (Clasificador)
+```
+clf = DecisionTreeClassifier(criterion = 'entropy', max_depth = 3)
+clf = clf.fit(X_train, y_train)
+y_pred = clf.predict(X_test)
+```
+[Documentación: DecisionTreeClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html)
+
+StringIO nos va a permitir establecer las reglas del árbol de decisión que generamos en strings.
+`dot_data = StringIO()`
+
+Después usamos la función export_graphviz, sobre él vamos a pasar el árbol de decisión entrenado y un outfile, que utilizará el dot_data generado anteriormente. Filled y rounded son parámetros de visualización.
+
+`export_graphviz(clf, outfile = dot_data, filled = True, rounded = True, special_characters = True, feature_names = X.columns, class_names = y.value_counts().index)`
+
+[Documentación: export_graphviz](https://scikit-learn.org/stable/modules/generated/sklearn.tree.export_graphviz.html)
+
+[Árbol de Decisión](/scripts/5-modelos-estadisticos-exploracion-prediccion/3-arbol-decision/arbol-decision.md)
+
+# Introducir conceptos de analítica avanzada
+
+## Proyecto análisis exploratorio: Descriptivos, outliers, creación y selección de variables
+
+
+
+[Proyecto](/scripts/6-caracterizar-informacion-analisis-exploratorio/1-proyecto-analisis-exploratorio/proyecto-analisis-exploratorio.md)
