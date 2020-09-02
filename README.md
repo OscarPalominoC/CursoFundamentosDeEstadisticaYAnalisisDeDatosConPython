@@ -656,8 +656,20 @@ Después usamos la función export_graphviz, sobre él vamos a pasar el árbol d
 
 # Introducir conceptos de analítica avanzada
 
+[Carpeta del Proyecto](/scripts/6-caracterizar-informacion-analisis-exploratorio/)
+
 ## Proyecto análisis exploratorio: Descriptivos, outliers, creación y selección de variables
 
+### Objetivo
 
+Definir las variables relevantes para clasificar la supervivencia de un pasajero en el Titanic.
+
+### Proceso
+1. Definición de target -> **X = 0** o **X = 1**
+2. Pre-Procesamiento
+    * Análisis descriptivo.
+    * Outliers.
+    * Nuevas variables
+    * <p style="font-color: red">Selección de variables</p>
 
 [Proyecto](/scripts/6-caracterizar-informacion-analisis-exploratorio/1-proyecto-analisis-exploratorio/proyecto-analisis-exploratorio.md)
