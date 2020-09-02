@@ -670,6 +670,6 @@ Definir las variables relevantes para clasificar la supervivencia de un pasajero
     * Análisis descriptivo.
     * Outliers.
     * Nuevas variables
-    * <p style="font-color: red">Selección de variables</p>
+    * <p style="color: red">Selección de variables</p>
 
 [Proyecto](/scripts/6-caracterizar-informacion-analisis-exploratorio/1-proyecto-analisis-exploratorio/proyecto-analisis-exploratorio.md)
