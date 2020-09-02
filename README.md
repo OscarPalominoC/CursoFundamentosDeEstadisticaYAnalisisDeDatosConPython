@@ -49,6 +49,7 @@ Realiza una predicción de la probabilidad de salvarse en el Titanic con las her
     * [Árboles de regresión y de clasificación](#árboles-de-regresión-y-de-clasificación)
 * [Introducir conceptos de analítica avanzada](#introducir-conceptos-de-analítica-avanzada)
     * [Proyecto análisis exploratorio: Descriptivos, outliers, creación y selección de variables](#proyecto-análisis-exploratorio-descriptivos-outliers-creación-y-selección-de-variables)
+    * [Proyecto análisis predictivo](#proyecto-análisis-predictivo)
 
 <hr>
 
@@ -669,7 +670,11 @@ Definir las variables relevantes para clasificar la supervivencia de un pasajero
 2. Pre-Procesamiento
     * Análisis descriptivo.
     * Outliers.
-    * Nuevas variables
-    * <p style="color: red">Selección de variables</p>
+    * Nuevas variables.
+    * ***Selección de variables***.
 
-[Proyecto](/scripts/6-caracterizar-informacion-analisis-exploratorio/1-proyecto-analisis-exploratorio/proyecto-analisis-exploratorio.md)
+[Primera Parte](/scripts/6-caracterizar-informacion-analisis-exploratorio/proyecto-titanic/1-parte/proyecto-analisis-exploratorio.md)
+
+## Proyecto análisis predictivo
+
+[Segunda Parte](/scripts/6-caracterizar-informacion-analisis-exploratorio/2-proyecto-analisis-predictivo/proyecto-analisis-predictivo.md)
